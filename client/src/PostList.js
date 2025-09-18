@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from "react";
+import CommentCreate from './CommentCreate';
+import CommentList from './CommentList';
 
 const PostList = () => {
   // matches initial empty value from POST in /posts/index.js
@@ -24,6 +26,8 @@ const PostList = () => {
       >
         <div className='card-body'>
           <h3>{post.postContent}</h3>
+          <CommentList postId={post.id} />
+          <CommentCreate postId={post.id} />
         </div>
       </div>
     )
