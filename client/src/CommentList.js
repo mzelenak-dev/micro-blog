@@ -15,7 +15,6 @@ const CommentList = ({postId}) => {
   }, []);
 
   const renderedComments = Object.values(comments).map(comment => {
-    console.log(comment)
     return (
       <li
         key={comment.id}
@@ -24,8 +23,6 @@ const CommentList = ({postId}) => {
       </li>
     )
   });
-
-  console.log('renderedComments', renderedComments);
 
   return (
     <ul>
