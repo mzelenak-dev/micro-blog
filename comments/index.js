@@ -27,4 +27,4 @@ app.post('/posts/:id/comments', (req, res) => {
   res.status(201).send(comments);
 });
 
-app.listen(4001, console.log('listening for comments on port 4001'));
+app.listen(4001, console.log('POSTS SRVC LISTENING ON PORT 4001'));
