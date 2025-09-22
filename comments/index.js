@@ -11,18 +11,20 @@ app.use(bodyParser.json());
 // {} over [] to facilitate commentId key lookups
 const commentsByPostId = {};
 
+// GET ALL COMMENTS FOR POSTID
 app.get('/posts/:id/comments', (req, res) => {
   const comments = commentsByPostId[req.params.id] || [];
 
   res.send(comments);
 });
 
+// CREATE NEW COMMENT FOR POSTID
 app.post('/posts/:id/comments', async (req, res) => {
   const { content } = req.body;
   const commentid = randomBytes(4).toString('hex');
   const comments = commentsByPostId[req.params.id] || [];
 
-  comments.push({ id: commentid, content });
+  comments.push({ id: commentid, content, status: 'pending' });
   commentsByPostId[req.params.id] = comments;
 
   await axios.post('http://localhost:4005/events', {
@@ -31,6 +33,7 @@ app.post('/posts/:id/comments', async (req, res) => {
       id: commentid,
       content,
       postId: req.params.id,
+      status: 'pending',
     }
   });
 
