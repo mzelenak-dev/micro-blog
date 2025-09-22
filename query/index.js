@@ -17,18 +17,17 @@ app.post('/events', (req, res) => {
   const {type, data} = req.body;
   
   if(type === 'PostCreated') {
-    const {id, title} = data;
-    posts[id] = { id, title, comments: [] };
+    const {id, postContent} = data;
+    posts[id] = { id, postContent, comments: [] };
   }
   if(type === 'CommentCreated') {
     const {id, content, postId} = data;
     const post = posts[postId];
-    if(posts.comments && Array.isArray(posts.comments)) {
-      posts.comments.push({id, content});
-    } else {
-      posts.comments = [];
-    }
+    
+    posts[id].comments.push({id, content});
   }
+
+  console.log(posts);
 
   res.send({});
 });
