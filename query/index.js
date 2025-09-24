@@ -21,10 +21,10 @@ app.post('/events', (req, res) => {
     posts[id] = { id, postContent, comments: [] };
   }
   if(type === 'CommentCreated') {
-    const {id, content, postId} = data;
+    const {id, content, postId, status} = data;
     const post = posts[postId];
     
-    post.comments.push({id, content});
+    post.comments.push({id, content, status});
   }
 
   console.log(posts);
@@ -32,4 +32,4 @@ app.post('/events', (req, res) => {
   res.send({});
 });
 
-app.listen(4002, () => { console.log('QUERY SRVC LISTENING ON PORT 4002') })
+app.listen(4002, () => { console.log('QUERY SRVC ON 4002') })

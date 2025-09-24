@@ -37,6 +37,4 @@ app.post('/events', (req, res) => {
   res.send({});
 });
 
-app.listen(4000, () => {
-  console.log('POSTS SRVC LISTENING ON PORT 4000');
-})
+app.listen(4000, () => {console.log('POSTS SRVC ON 4000')})

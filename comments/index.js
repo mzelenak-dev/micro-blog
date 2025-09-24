@@ -30,10 +30,10 @@ app.post('/posts/:id/comments', async (req, res) => {
   await axios.post('http://localhost:4005/events', {
     type: 'CommentCreated',
     data: {
-      id: commentid,
       content,
-      postId: req.params.id,
+      id: commentid,
       status: 'pending',
+      postId: req.params.id,
     }
   });
 
@@ -44,4 +44,4 @@ app.post('/events', (req, res) => {
   res.send({});
 });
 
-app.listen(4001, console.log('COMMENTS SRVC LISTENING ON PORT 4001'));
+app.listen(4001, console.log('COMMENTS SRVC ON 4001'));
