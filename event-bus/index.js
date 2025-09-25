@@ -5,8 +5,15 @@ const axios = require('axios');
 const app = express();
 app.use(bodyParser.json());
 
+const events = [];
+
+app.get('/events', (req, res) => {
+  res.send(events);
+});
+
 app.post('/events', (req, res) => {
   const event = req.body;
+  events.push(event);
 
   console.log(`Event ${JSON.stringify(event.type)} processed`);
 
