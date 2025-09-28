@@ -38,6 +38,6 @@ app.post('/events', (req, res) => {
 });
 
 app.listen(4000, () => {
-  console.log('POSTS SRVC ON 4000');
   console.log('v2');
+  console.log('POSTS SRVC ON 4000');
 });
