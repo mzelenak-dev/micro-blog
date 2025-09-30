@@ -46,7 +46,7 @@ app.listen(4002, async () => {
   
   // try to pull all existing events from EVBUS data store
   try {
-    const res = await axios.get('http://localhost:4005/events');
+    const res = await axios.get('http://event-bus-srv:4005/events');
 
     for(let event of res.data) {
       console.log(`Processing event ${JSON.stringify(event)}`);

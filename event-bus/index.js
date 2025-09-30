@@ -17,10 +17,10 @@ app.post('/events', (req, res) => {
 
   console.log(`Event ${JSON.stringify(event.type)} processed`);
 
-  axios.post('http://localhost:4000/events', event).catch(err => console.log('EV-BUS Error posting to :4000', err));
-  axios.post('http://localhost:4001/events', event).catch(err => console.log('EV-BUS Error posting to :4001', err));
-  axios.post('http://localhost:4002/events', event).catch(err => console.log('EV-BUS Error posting to :4002', err));
-  axios.post('http://localhost:4003/events', event).catch(err => console.log('EV-BUS Error posting to :4003', err));
+  axios.post('http://posts-clusterip-srv:4000/events', event).catch(err => console.log('EV-BUS Error posting to posts-clusterip-srv:4000', err));
+  axios.post('http://comments-srv:4001/events', event).catch(err => console.log('EV-BUS Error posting to :4001', err));
+  axios.post('http://query-srv:4002/events', event).catch(err => console.log('EV-BUS Error posting to :4002', err));
+  axios.post('http://moderation-srv:4003/events', event).catch(err => console.log('EV-BUS Error posting to :4003', err));
 
   res.send({ status: 'OK' });
 });

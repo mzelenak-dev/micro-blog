@@ -9,7 +9,8 @@ const PostList = () => {
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get('http://localhost:4002/posts');
+      // posts.com dev url in /etc/hosts
+      const res = await axios.get('http://posts.com:4002/posts');
       setPosts(res.data);
     } catch(err) {
       console.error(err);

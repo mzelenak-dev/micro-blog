@@ -25,10 +25,10 @@ app.post('/posts', async (req, res) => {
     comments: []
   };
 
-  await axios.post('http://localhost:4005/events', {
-      type: 'PostCreated',
-      data: posts[id]
-    });
+  await axios.post('http://event-bus-srv:4005/events', {
+    type: 'PostCreated',
+    data: posts[id]
+  });
 
   res.status(201).send(posts[id]);
 });
@@ -38,6 +38,5 @@ app.post('/events', (req, res) => {
 });
 
 app.listen(4000, () => {
-  console.log('v2');
   console.log('POSTS SRVC ON 4000');
 });
