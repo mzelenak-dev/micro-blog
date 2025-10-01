@@ -8,7 +8,7 @@ const PostCreate = ({title}) => {
     e.preventDefault();
 
     // posts.com dev url in /etc/hosts
-    await axios.post('http://posts.com:4000/posts', {
+    await axios.post('http://posts.com/posts/create', {
       postContent
     });
   };

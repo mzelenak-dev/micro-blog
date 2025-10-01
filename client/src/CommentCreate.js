@@ -8,7 +8,7 @@ const CommentCreate = ({postId}) => {
     e.preventDefault();
 
     // posts.com dev url in /etc/hosts
-    await axios.post(`http://posts.com:4001/posts/${postId}/comments`, {
+    await axios.post(`http://posts.com/posts/${postId}/comments`, {
       content
     });
 
