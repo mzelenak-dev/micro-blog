@@ -6,6 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.post('/events', async (req, res) => {
+  console.log('POST to moderation /events');
   const {type, data} = req.body;
   const commentContent = data.content;
 

@@ -31,10 +31,12 @@ const handleEvent = (type, data) => {
 }
 
 app.get('/posts', (req, res) => {
+  console.log('GET to query /posts');
   res.send(posts);
 });
 
 app.post('/events', (req, res) => {
+  console.log('POST to query /events');
   const {type, data} = req.body;
   handleEvent(type, data);
 
@@ -46,6 +48,7 @@ app.listen(4002, async () => {
   
   // try to pull all existing events from EVBUS data store
   try {
+    console.log('attempted to sync all events on event bus');
     const res = await axios.get('http://event-bus-srv:4005/events');
 
     for(let event of res.data) {

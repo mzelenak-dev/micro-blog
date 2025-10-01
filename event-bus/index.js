@@ -8,10 +8,12 @@ app.use(bodyParser.json());
 const events = [];
 
 app.get('/events', (req, res) => {
+  console.log('GET to event-bus /events');
   res.send(events);
 });
 
 app.post('/events', (req, res) => {
+  console.log('POST to event-bus /events');
   const event = req.body;
   events.push(event);
 
