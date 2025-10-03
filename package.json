@@ -1,27 +1,26 @@
 {
   "name": "micro-blog",
-  "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "start:posts": "npm start --prefix posts",
     "start:comments": "npm start --prefix comments",
     "start:query": "npm start --prefix query",
     "start:event-bus": "npm start --prefix event-bus",
     "start:moderation": "npm start --prefix moderation",
-    "dev": "npm-run-all --parallel start:*"
+    "dev": "npm-run-all --parallel start:*",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mzelenak-dev/microservices-ecomm.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mzelenak-dev/microservices-ecomm/issues"
-  },
-  "homepage": "https://github.com/mzelenak-dev/microservices-ecomm#readme",
-  "description": "",
   "devDependencies": {
-    "npm-run-all": "^4.1.5"
+    "@eslint/js": "^9.36.0",
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^6.1.0",
+    "globals": "^16.4.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.6.2"
   }
 }
