@@ -6,10 +6,10 @@ const app = express();
 app.use(bodyParser.json());
 
 app.post('/events', async (req, res) => {
-  const {type, data} = req.body;
+  const { type, data } = req.body;
   const commentContent = data.content;
 
-  if(type === 'CommentCreated') {
+  if (type === 'CommentCreated') {
     const status = commentContent.includes('orange') ? 'rejected' : 'approved';
 
     await axios.post('http://event-bus-srv:4005/events', {
@@ -19,11 +19,13 @@ app.post('/events', async (req, res) => {
         id: data.id,
         postId: data.postId,
         content: commentContent,
-      }
-    })
+      },
+    });
   }
 
   res.send({});
 });
 
-app.listen(4003, () => { console.log('MODERATION SRVC ON 4003')});
+app.listen(4003, () => {
+  console.log('MODERATION SRVC ON 4003');
+});

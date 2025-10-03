@@ -1,15 +1,15 @@
 import axios from 'axios';
-import { useState } from "react";
+import { useState } from 'react';
 
-const PostCreate = ({title}) => {
+const PostCreate = ({ title }) => {
   const [postContent, setPostContent] = useState('');
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // posts.com dev url in /etc/hosts 
+    // posts.com dev url in /etc/hosts
     await axios.post('http://posts.com/posts/create', {
-      postContent
+      postContent,
     });
   };
 
@@ -19,7 +19,7 @@ const PostCreate = ({title}) => {
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label>Post Content</label>
-          <input 
+          <input
             type="text"
             value={postContent}
             className="form-control"
@@ -29,7 +29,7 @@ const PostCreate = ({title}) => {
         <button className="btn btn-primary">Submit</button>
       </form>
     </div>
-  )
+  );
 };
 
 export default PostCreate;

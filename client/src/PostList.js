@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import CommentCreate from './CommentCreate';
 import CommentList from './CommentList';
 
@@ -12,7 +12,7 @@ const PostList = () => {
       // posts.com dev url in /etc/hosts
       const res = await axios.get('http://posts.com/posts');
       setPosts(res.data);
-    } catch(err) {
+    } catch (err) {
       console.error(err);
     }
   };
@@ -21,27 +21,27 @@ const PostList = () => {
     fetchPosts();
   }, []);
 
-  const renderedPosts = Object.values(posts).map(post => {
+  const renderedPosts = Object.values(posts).map((post) => {
     return (
       <div
         key={post.id}
-        className='card'
-        style={{width: '30%', marginBottom: '20px'}}
+        className="card"
+        style={{ width: '30%', marginBottom: '20px' }}
       >
-        <div className='card-body'>
+        <div className="card-body">
           <h3>{post.postContent}</h3>
           <CommentList comments={post.comments} />
           <CommentCreate postId={post.id} />
         </div>
       </div>
-    )
+    );
   });
 
   return (
     <div className="container d-flex flex-row flex-wrap justify-content-between">
       {renderedPosts}
     </div>
-  )
+  );
 };
 
 export default PostList;

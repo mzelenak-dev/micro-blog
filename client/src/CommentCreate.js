@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { useState } from "react";
+import { useState } from 'react';
 
-const CommentCreate = ({postId}) => {
+const CommentCreate = ({ postId }) => {
   const [content, setContent] = useState('');
 
   const onSubmit = async (e) => {
@@ -9,7 +9,7 @@ const CommentCreate = ({postId}) => {
 
     // posts.com dev url in /etc/hosts
     await axios.post(`http://posts.com/posts/${postId}/comments`, {
-      content
+      content,
     });
 
     setContent('');
@@ -20,7 +20,7 @@ const CommentCreate = ({postId}) => {
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label>Create new comment</label>
-          <input 
+          <input
             type="text"
             value={content}
             className="form-control"
@@ -30,7 +30,7 @@ const CommentCreate = ({postId}) => {
         <button className="btn btn-primary">Submit</button>
       </form>
     </div>
-  )
+  );
 };
 
 export default CommentCreate;

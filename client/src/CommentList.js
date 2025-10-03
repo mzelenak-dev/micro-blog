@@ -1,25 +1,21 @@
-const CommentList = ({comments}) => {
-  const renderedComments = Object.values(comments).map(comment => {
+const CommentList = ({ comments }) => {
+  const renderedComments = Object.values(comments).map((comment) => {
     let content;
 
-    if(comment.status === 'pending') {
+    if (comment.status === 'pending') {
       content = 'This comments content is awaiting moderation.';
     }
-    if(comment.status === 'approved') {
+    if (comment.status === 'approved') {
       content = comment.content;
     }
-    if(comment.status === 'rejected') {
+    if (comment.status === 'rejected') {
       content = 'This comments content has been rejected.';
     }
 
     return <li key={comment.id}>{content}</li>;
   });
 
-  return (
-    <ul>
-      {renderedComments}
-    </ul>
-  )
+  return <ul>{renderedComments}</ul>;
 };
 
 export default CommentList;

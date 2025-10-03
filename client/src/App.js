@@ -1,14 +1,14 @@
-import PostCreate from "./PostCreate";
-import PostList from "./PostList";
+import PostCreate from './PostCreate';
+import PostList from './PostList';
 
 const App = () => {
   return (
     <>
       <PostCreate title="Create Post" />
-      <hr/>
+      <hr />
       <PostList />
     </>
-  )
+  );
 };
 
 export default App;

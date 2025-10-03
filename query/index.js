@@ -14,32 +14,32 @@ const fetchEvents = async () => {
   while (!success) {
     try {
       const res = await axios.get('http://event-bus-srv:4005/events');
-      res.data.forEach(event => handleEvent(event.type, event.data));
+      res.data.forEach((event) => handleEvent(event.type, event.data));
       success = true;
       console.success('Query: Event Bus History Sync Successful');
     } catch (err) {
-      console.log('Event bus unavailable, retrying in 2s...');
-      await new Promise(r => setTimeout(r, 2000));
+      console.log('Event bus unavailable, retrying in 2s...', err);
+      await new Promise((r) => setTimeout(r, 2000));
     }
   }
 };
 
 const handleEvent = (type, data) => {
-  if(type === 'PostCreated') {
-    const {id, postContent} = data;
+  if (type === 'PostCreated') {
+    const { id, postContent } = data;
     posts[id] = { id, postContent, comments: [] };
   }
-  if(type === 'CommentCreated') {
-    const {id, content, postId, status} = data;
+  if (type === 'CommentCreated') {
+    const { id, content, postId, status } = data;
     const post = posts[postId];
-    
-    post.comments.push({id, content, status});
+
+    post.comments.push({ id, content, status });
   }
-  if(type === 'CommentUpdated') {
-    const {id, content, postId, status} = data;
+  if (type === 'CommentUpdated') {
+    const { id, content, postId, status } = data;
     const post = posts[postId];
-    const comment = post.comments.find(comment => comment.id === id);
-    
+    const comment = post.comments.find((comment) => comment.id === id);
+
     comment.status = status;
     comment.content = content;
   }
@@ -50,7 +50,7 @@ app.get('/posts', (req, res) => {
 });
 
 app.post('/events', (req, res) => {
-  const {type, data} = req.body;
+  const { type, data } = req.body;
   handleEvent(type, data);
 
   res.send({});
