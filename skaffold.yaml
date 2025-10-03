@@ -1,0 +1,62 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+metadata:
+  name: micro-blog
+deploy:
+  kubectl:
+    manifests:
+      - infra/k8s/*.yaml
+build:
+  local:
+    push: false
+    useDockerCLI: true
+    useBuildkit: false
+  artifacts:
+    - image: zed82zel/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
+    - image: zed82zel/comments
+      context: comments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: zed82zel/event-bus
+      context: event-bus
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: zed82zel/moderation
+      context: moderation
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: zed82zel/posts
+      context: posts
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: zed82zel/query
+      context: query
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .

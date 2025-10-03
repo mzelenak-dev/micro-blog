@@ -8,16 +8,13 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-// storing all data in local memory
 const posts = {};
 
 app.get('/posts', (req, res) => {
-  console.log('GET to posts /posts');
   res.send(posts);
 });
 
 app.post('/posts/create', async (req, res) => {
-  console.log('POST to query /posts/create');
   const id = randomBytes(4).toString('hex');
   const { postContent } = req.body;
 
@@ -36,7 +33,6 @@ app.post('/posts/create', async (req, res) => {
 });
 
 app.post('/events', (req, res) => {
-  console.log('POST to posts /events');
   res.send({});
 });
 

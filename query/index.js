@@ -9,6 +9,21 @@ app.use(cors());
 
 const posts = {};
 
+const fetchEvents = async () => {
+  let success = false;
+  while (!success) {
+    try {
+      const res = await axios.get('http://event-bus-srv:4005/events');
+      res.data.forEach(event => handleEvent(event.type, event.data));
+      success = true;
+      console.success('Query: Event Bus History Sync Successful');
+    } catch (err) {
+      console.log('Event bus unavailable, retrying in 2s...');
+      await new Promise(r => setTimeout(r, 2000));
+    }
+  }
+};
+
 const handleEvent = (type, data) => {
   if(type === 'PostCreated') {
     const {id, postContent} = data;
@@ -28,15 +43,13 @@ const handleEvent = (type, data) => {
     comment.status = status;
     comment.content = content;
   }
-}
+};
 
 app.get('/posts', (req, res) => {
-  console.log('GET to query /posts');
   res.send(posts);
 });
 
 app.post('/events', (req, res) => {
-  console.log('POST to query /events');
   const {type, data} = req.body;
   handleEvent(type, data);
 
@@ -45,17 +58,6 @@ app.post('/events', (req, res) => {
 
 app.listen(4002, async () => {
   console.log('QUERY SRVC ON 4002');
-  
-  // try to pull all existing events from EVBUS data store
-  try {
-    console.log('attempted to sync all events on event bus');
-    const res = await axios.get('http://event-bus-srv:4005/events');
 
-    for(let event of res.data) {
-      console.log(`Processing event ${JSON.stringify(event)}`);
-      handleEvent(event.type, event.data);
-    }
-  } catch(err) {
-    console.error(err);
-  }
-})
+  fetchEvents();
+});

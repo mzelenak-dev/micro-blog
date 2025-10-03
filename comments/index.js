@@ -8,20 +8,15 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// {} over [] to facilitate commentId key lookups
 const commentsByPostId = {};
 
-// GET ALL COMMENTS FOR POSTID
 app.get('/posts/:id/comments', (req, res) => {
-  console.log('GET to comments /posts/:id/comments');
   const comments = commentsByPostId[req.params.id] || [];
 
   res.send(comments);
 });
 
-// CREATE NEW COMMENT FOR POSTID
 app.post('/posts/:id/comments', async (req, res) => {
-  console.log('POST to comments /posts/:id/comments');
   const { content } = req.body;
   const commentid = randomBytes(4).toString('hex');
   const comments = commentsByPostId[req.params.id] || [];
@@ -43,7 +38,6 @@ app.post('/posts/:id/comments', async (req, res) => {
 });
 
 app.post('/events', async (req, res) => {
-  console.log('POST to comments /events');
   const {type, data} = req.body;
 
   if(type === 'CommentModerated') {
